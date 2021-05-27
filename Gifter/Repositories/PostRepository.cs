@@ -191,7 +191,7 @@ namespace Gifter.Repositories
                           FROM Post p
                                LEFT JOIN UserProfile up ON p.UserProfileId = up.id
                                LEFT JOIN Comment c on c.PostId = p.id
-                        ORDER BY p.DateCreated";
+                        ";
 
                     var reader = cmd.ExecuteReader();
 
