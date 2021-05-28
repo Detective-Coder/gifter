@@ -390,13 +390,14 @@ namespace Gifter.Repositories
                         up.ImageUrl AS UserProfileImageUrl
                         FROM Post p 
                             LEFT JOIN UserProfile up ON p.UserProfileId = up.id
-                        WHERE PostDateCreated >= @Since";
+                        WHERE p.DateCreated >= @Since";
 
                     cmd.CommandText = sql;
-                    DbUtils.AddParameter(cmd, "@Since", $"%{since}%");
+                    DbUtils.AddParameter(cmd, "@Since", since);
                     var reader = cmd.ExecuteReader();
 
                     var posts = new List<Post>();
+                    
                     while (reader.Read())
                     {
                         posts.Add(new Post()
