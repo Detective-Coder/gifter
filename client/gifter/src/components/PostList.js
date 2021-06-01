@@ -15,9 +15,7 @@ const PostList = () => {
   return (
     <>
       <h2>Posts</h2>
-      <button onClick={() => {history.push("/posts/create")}}>
-          Add Post
-      </button>
+
       <div className="container">
         <div className="row justify-content-center">
           <div className="cards-column">
