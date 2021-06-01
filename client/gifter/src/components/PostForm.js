@@ -30,8 +30,8 @@ const PostForm = () => {
       title: post.title,
       image: post.imageUrl,
       caption: post.caption,
-      userProfileId; ,
-      dateCreated: 
+      userProfileId: 1,
+      dateCreated: "2020-04-20T00:00:00"
     })
   }
 
