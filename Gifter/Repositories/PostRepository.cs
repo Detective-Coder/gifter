@@ -191,6 +191,7 @@ namespace Gifter.Repositories
                           FROM Post p
                                LEFT JOIN UserProfile up ON p.UserProfileId = up.id
                                LEFT JOIN Comment c on c.PostId = p.id
+  
                         ";
 
                     var reader = cmd.ExecuteReader();
@@ -329,8 +330,11 @@ namespace Gifter.Repositories
 
                         up.Name, up.Bio, up.Email, up.DateCreated AS UserProfileDateCreated, 
                         up.ImageUrl AS UserProfileImageUrl
+
+                        c.Id AS CommentId, c.Message, c.UserProfileId AS CommentUserProfileId
                         FROM Post p 
                         LEFT JOIN UserProfile up ON p.UserProfileId = up.id
+                        LEFT JOIN Comment c on c.PostId = p.id
                         WHERE p.Title LIKE @Criterion OR p.Caption LIKE @Criterion";
 
                     if (sortDescending)

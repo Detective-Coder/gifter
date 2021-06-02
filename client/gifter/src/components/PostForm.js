@@ -67,8 +67,8 @@ const PostForm = () => {
           </div>
         </fieldset>
         <button className="btn btn-primary"
-          onClick={event => {
-            event.preventDefault() // Prevent browser from submitting the form and refreshing the page
+          onClick={() => {
+            //event.preventDefault() // Prevent browser from submitting the form and refreshing the page
             handleSavePost()
           }}>Save Post
         </button>
