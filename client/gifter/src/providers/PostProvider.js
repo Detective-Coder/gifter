@@ -6,13 +6,14 @@ export const PostProvider = (props) => {
   const [posts, setPosts] = useState([]);
 
   const getAllPosts = () => {
-    return fetch("https:localhost:5001/api/post")
+    return fetch("/api/post")
       .then((res) => res.json())
       .then(setPosts);
   };
 
   const addPost = (post) => {
-    return fetch("https:localhost:5001/api/post", {
+    debugger
+    return fetch("/api/post", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

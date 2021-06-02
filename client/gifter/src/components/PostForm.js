@@ -28,8 +28,8 @@ const PostForm = () => {
     //POST - add
     addPost({
       title: post.title,
-      image: post.imageUrl,
-      caption: post.caption,
+      imageUrl: post.postImage,
+      caption: post.postCaption,
       userProfileId: 1,
       dateCreated: "2020-04-20T00:00:00"
     })
