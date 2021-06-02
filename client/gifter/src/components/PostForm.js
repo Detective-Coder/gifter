@@ -38,15 +38,7 @@ const PostForm = () => {
   return (
     <form className="postForm">
       <h2 className="postForm__title">New Post</h2>
-      {/* <fieldset>
-          <div className="form-group">
-            <label htmlFor="postTitle">Post title: </label>
-            <input type="text" id="postTitle" name="title" required autoFocus className="form-control"
-            placeholder="Post title"
-            onChange={handleControlledInputChange}
-            defaultValue={post.title}/>
-          </div>
-        </fieldset> */}
+
         <fieldset>
           <div className="form-group">
             <label htmlFor="postTitle">Post title:</label>

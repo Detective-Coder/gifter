@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { PostContext } from "../providers/PostProvider";
 import { useHistory } from "react-router-dom";
 import Post from "./Post";
@@ -6,11 +6,22 @@ import Post from "./Post";
 const PostList = () => {
   const { posts, getAllPosts } = useContext(PostContext);
 
+
   useEffect(() => {
     getAllPosts();
   }, []);
 
-  const history = useHistory();
+  // useEffect dependency array with dependencies - will run if dependency changes (state)
+  // searchTerms will cause a change
+  // useEffect(() => {
+  //   if (searchTerms !== "") {
+  //     If the search field is not blank, display matching posts
+  //     getPostsBySearch();
+  //   } else {
+  //     If the search field is blank, display all posts
+  //     setFiltered(posts)
+  //   }
+  // }, [searchTerms, posts])
 
   return (
     <>
