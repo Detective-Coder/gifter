@@ -13,6 +13,15 @@ const Post = ({ post }) => {
             <strong>{post.title}</strong>
           </p>
           <p>{post.caption}</p>
+          <div>
+            {post.comments !== null ?
+              (
+                post.comments.map((c) => (
+                  <p>{c.message}</p>
+                ))
+              ) : (<p>No comments yet...</p>)}
+          </div>
+
         </CardBody>
       </Card>
   );
