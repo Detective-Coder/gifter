@@ -29,8 +29,12 @@ export const PostProvider = (props) => {
     });
   };
 
+  const getPost = (id) => {
+    return fetch(`/api/post/getpostbyidwithcomments/${id}`).then((res) => res.json());
+  };
+
   return (
-    <PostContext.Provider value={{ posts, getAllPosts, addPost, searchTerms, setSearchTerms, getPostsBySearch }}>
+    <PostContext.Provider value={{ posts, getAllPosts, addPost, searchTerms, setSearchTerms, getPostsBySearch, getPost }}>
       {props.children}
     </PostContext.Provider>
   );

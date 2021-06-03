@@ -245,7 +245,7 @@ namespace Gifter.Repositories
             }
         }
 
-        public List<Post> GetPostsByIdWithComments()
+        public Post GetPostByIdWithComments(int id)
         {
             using (var conn = Connection)
             {
@@ -264,21 +264,19 @@ namespace Gifter.Repositories
                            LEFT JOIN UserProfile up ON p.UserProfileId = up.id
                            LEFT JOIN Comment c on c.PostId = p.id
                       WHERE p.Id = @Id
-                      ORDER BY p.DateCreated";
-
+                      ";
+                    DbUtils.AddParameter(cmd, "@id", id);
                     var reader = cmd.ExecuteReader();
 
-                    var posts = new List<Post>();
+                    Post existingPost = null;
                     while (reader.Read())
                     {
-                        var postId = DbUtils.GetInt(reader, "PostId");
 
-                        var existingPost = posts.FirstOrDefault(p => p.Id == postId);
                         if (existingPost == null)
                         {
                             existingPost = new Post()
                             {
-                                Id = postId,
+                                Id = DbUtils.GetInt(reader, "PostId"),
                                 Title = DbUtils.GetString(reader, "Title"),
                                 Caption = DbUtils.GetString(reader, "Caption"),
                                 DateCreated = DbUtils.GetDateTime(reader, "PostDateCreated"),
@@ -295,7 +293,6 @@ namespace Gifter.Repositories
                                 Comments = new List<Comment>()
                             };
 
-                            posts.Add(existingPost);
                         }
 
                         if (DbUtils.IsNotDbNull(reader, "CommentId"))
@@ -304,7 +301,7 @@ namespace Gifter.Repositories
                             {
                                 Id = DbUtils.GetInt(reader, "CommentId"),
                                 Message = DbUtils.GetString(reader, "Message"),
-                                PostId = postId,
+                                PostId = DbUtils.GetInt(reader, "PostId"),
                                 UserProfileId = DbUtils.GetInt(reader, "CommentUserProfileId")
                             });
                         }
@@ -312,7 +309,7 @@ namespace Gifter.Repositories
 
                     reader.Close();
 
-                    return posts;
+                    return existingPost;
                 }
             }
         }
