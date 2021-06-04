@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { Spinner } from "reactstrap";
+import firebase from "firebase/app";
+import "firebase/auth";
 
 export const PostContext = React.createContext();
 
