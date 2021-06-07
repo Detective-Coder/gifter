@@ -9,10 +9,10 @@ namespace Gifter.Repositories
         void Add(Post post);
         void Delete(int id);
         List<Post> GetAll();
-        Post GetById(int id);
-        void Update(Post post);
         List<Post> GetAllWithComments();
-        Post GetPostByIdWithComments(int id);
+        Post GetById(int id);
+        Post GetByIdWithComments(int id);
+        void Update(Post post);
         List<Post> Search(string criterion, bool sortDescending);
         List<Post> Hottest(DateTime since);
     }

@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Gifter.Repositories;
 using Gifter.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Gifter.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PostController : ControllerBase
@@ -21,10 +23,28 @@ namespace Gifter.Controllers
             return Ok(_postRepository.GetAll());
         }
 
+        [HttpGet("GetWithComments")]
+        public IActionResult GetWithComments()
+        {
+            var posts = _postRepository.GetAllWithComments();
+            return Ok(posts);
+        }
+
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
             var post = _postRepository.GetById(id);
+            if (post == null)
+            {
+                return NotFound();
+            }
+            return Ok(post);
+        }
+
+        [HttpGet("{id}/comments")]
+        public IActionResult GetPostWithComments(int id)
+        {
+            var post = _postRepository.GetByIdWithComments(id);
             if (post == null)
             {
                 return NotFound();
@@ -56,20 +76,6 @@ namespace Gifter.Controllers
         {
             _postRepository.Delete(id);
             return NoContent();
-        }
-
-        [HttpGet("GetWithComments")]
-        public IActionResult GetWithComments()
-        {
-            var posts = _postRepository.GetAllWithComments();
-            return Ok(posts);
-        }
-
-        [HttpGet("GetPostByIdWithComments/{id}")]
-        public IActionResult GetPostByIdWithComments(int id)
-        {
-            var post = _postRepository.GetPostByIdWithComments(id);
-            return Ok(post);
         }
 
         [HttpGet("search")]

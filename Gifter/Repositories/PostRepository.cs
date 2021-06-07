@@ -245,7 +245,7 @@ namespace Gifter.Repositories
             }
         }
 
-        public Post GetPostByIdWithComments(int id)
+        public Post GetByIdWithComments(int id)
         {
             using (var conn = Connection)
             {
@@ -268,13 +268,13 @@ namespace Gifter.Repositories
                     DbUtils.AddParameter(cmd, "@id", id);
                     var reader = cmd.ExecuteReader();
 
-                    Post existingPost = null;
-                    while (reader.Read())
+                    Post post = null;
+                    if (reader.Read())
                     {
+                        var postId = DbUtils.GetInt(reader, "PostId");
 
-                        if (existingPost == null)
-                        {
-                            existingPost = new Post()
+              
+                            post = new Post()
                             {
                                 Id = DbUtils.GetInt(reader, "PostId"),
                                 Title = DbUtils.GetString(reader, "Title"),
@@ -293,11 +293,11 @@ namespace Gifter.Repositories
                                 Comments = new List<Comment>()
                             };
 
-                        }
+                        
 
                         if (DbUtils.IsNotDbNull(reader, "CommentId"))
                         {
-                            existingPost.Comments.Add(new Comment()
+                            post.Comments.Add(new Comment()
                             {
                                 Id = DbUtils.GetInt(reader, "CommentId"),
                                 Message = DbUtils.GetString(reader, "Message"),
@@ -309,8 +309,8 @@ namespace Gifter.Repositories
 
                     reader.Close();
 
-                    return existingPost;
-                }
+                    return post;
+                } return null;
             }
         }
 
