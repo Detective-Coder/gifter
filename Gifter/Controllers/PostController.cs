@@ -41,16 +41,16 @@ namespace Gifter.Controllers
             return Ok(post);
         }
 
-        [HttpGet("{id}/comments")]
-        public IActionResult GetPostWithComments(int id)
-        {
-            var post = _postRepository.GetByIdWithComments(id);
-            if (post == null)
-            {
-                return NotFound();
-            }
-            return Ok(post);
-        }
+        //[HttpGet("{id}/comments")]
+        //public IActionResult GetPostWithComments(int id)
+        //{
+        //    var post = _postRepository.GetByIdWithComments(id);
+        //    if (post == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(post);
+        //}
 
         [HttpPost]
         public IActionResult Post(Post post)
@@ -84,10 +84,10 @@ namespace Gifter.Controllers
             return Ok(_postRepository.Search(q, sortDesc));
         }
 
-        [HttpGet("hottest")]
-        public IActionResult Hottest(DateTime since)
-        {
-            return Ok(_postRepository.Hottest(since));
-        }
+        //[HttpGet("hottest")]
+        //public IActionResult Hottest(DateTime since)
+        //{
+        //    return Ok(_postRepository.Hottest(since));
+        //}
     }
 }
